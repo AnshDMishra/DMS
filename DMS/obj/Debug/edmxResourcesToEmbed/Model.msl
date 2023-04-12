@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dmsModelStoreContainer" CdmEntityContainer="dmsEntities">
+    <EntitySetMapping Name="admins">
+      <EntityTypeMapping TypeName="dmsModel.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="staffID" ColumnName="staffID" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="documentstores">
+      <EntityTypeMapping TypeName="dmsModel.documentstore">
+        <MappingFragment StoreEntitySet="documentstore">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="studentId" ColumnName="studentId" />
+          <ScalarProperty Name="semesterId" ColumnName="semesterId" />
+          <ScalarProperty Name="docCategory" ColumnName="docCategory" />
+          <ScalarProperty Name="document" ColumnName="document" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="semesters">
+      <EntityTypeMapping TypeName="dmsModel.semester">
+        <MappingFragment StoreEntitySet="semester">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="session_id" ColumnName="session_id" />
+          <ScalarProperty Name="semester_name" ColumnName="semester_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sessions">
+      <EntityTypeMapping TypeName="dmsModel.session">
+        <MappingFragment StoreEntitySet="session">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="session_name" ColumnName="session_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students">
+      <EntityTypeMapping TypeName="dmsModel.student">
+        <MappingFragment StoreEntitySet="student">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="matric_num" ColumnName="matric_num" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="studentrequirements">
+      <EntityTypeMapping TypeName="dmsModel.studentrequirement">
+        <MappingFragment StoreEntitySet="studentrequirement">
+          <ScalarProperty Name="birth_certificate" ColumnName="birth_certificate" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="olevel_type" ColumnName="olevel_type" />
+          <ScalarProperty Name="olevel_result" ColumnName="olevel_result" />
+          <ScalarProperty Name="jamb_type" ColumnName="jamb_type" />
+          <ScalarProperty Name="jamb_de" ColumnName="jamb_de" />
+          <ScalarProperty Name="affidavit" ColumnName="affidavit" />
+          <ScalarProperty Name="referece_letter" ColumnName="referece_letter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

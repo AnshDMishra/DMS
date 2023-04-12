@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dmsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="firstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="staffID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="created_on" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="documentstore">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="studentId" Type="Int32" Nullable="false" />
+    <Property Name="semesterId" Type="Int32" Nullable="false" />
+    <Property Name="docCategory" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="document" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="student" Relationship="Self.documentstore_ibfk_1" FromRole="documentstore" ToRole="student" />
+    <NavigationProperty Name="semester" Relationship="Self.documentstore_ibfk_2" FromRole="documentstore" ToRole="semester" />
+  </EntityType>
+  <EntityType Name="semester">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="session_id" Type="Int32" Nullable="false" />
+    <Property Name="semester_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="documentstores" Relationship="Self.documentstore_ibfk_2" FromRole="semester" ToRole="documentstore" />
+    <NavigationProperty Name="session" Relationship="Self.semester_ibfk_1" FromRole="semester" ToRole="session" />
+  </EntityType>
+  <EntityType Name="session">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="session_name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="semesters" Relationship="Self.semester_ibfk_1" FromRole="session" ToRole="semester" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="firstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="matric_num" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="level" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DOB" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="created_on" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="documentstores" Relationship="Self.documentstore_ibfk_1" FromRole="student" ToRole="documentstore" />
+  </EntityType>
+  <EntityType Name="studentrequirement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="student_id" Type="Int32" Nullable="false" />
+    <Property Name="olevel_type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="olevel_result" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="jamb_type" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="jamb_de" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="affidavit" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="referece_letter" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="birth_certificate" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="documentstore_ibfk_1">
+    <End Role="student" Type="Self.student" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="documentstore" Type="Self.documentstore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="documentstore">
+        <PropertyRef Name="studentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="documentstore_ibfk_2">
+    <End Role="semester" Type="Self.semester" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="documentstore" Type="Self.documentstore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="semester">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="documentstore">
+        <PropertyRef Name="semesterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="semester_ibfk_1">
+    <End Role="session" Type="Self.session" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="semester" Type="Self.semester" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="session">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="semester">
+        <PropertyRef Name="session_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dmsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="documentstores" EntityType="Self.documentstore" />
+    <EntitySet Name="semesters" EntityType="Self.semester" />
+    <EntitySet Name="sessions" EntityType="Self.session" />
+    <EntitySet Name="students" EntityType="Self.student" />
+    <EntitySet Name="studentrequirements" EntityType="Self.studentrequirement" />
+    <AssociationSet Name="documentstore_ibfk_1" Association="Self.documentstore_ibfk_1">
+      <End Role="student" EntitySet="students" />
+      <End Role="documentstore" EntitySet="documentstores" />
+    </AssociationSet>
+    <AssociationSet Name="documentstore_ibfk_2" Association="Self.documentstore_ibfk_2">
+      <End Role="semester" EntitySet="semesters" />
+      <End Role="documentstore" EntitySet="documentstores" />
+    </AssociationSet>
+    <AssociationSet Name="semester_ibfk_1" Association="Self.semester_ibfk_1">
+      <End Role="session" EntitySet="sessions" />
+      <End Role="semester" EntitySet="semesters" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
